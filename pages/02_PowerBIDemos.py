@@ -37,7 +37,8 @@ widget_urls = [
 {"name": "Power BI Differentiators DREAM Demo Integrated into Web App",
 "url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
 {"name": "Power BI Differentiators DREAM Demo Full Click by Click", "url": "https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
-    
+{"name": "Modern Analytics with Azure Databricks and Power BI DREAM Demo","url": "https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+{"name": "Task 3.1: Create a Semantic model and generate insights using Copilot for Power BI","url": "https://regale.cloud/Microsoft/viewer/3075/task-31-create-semantic-model-and-generate-insights-using-copilot-for-power-bi/index.html#/0/0"}   
     
 
 ]

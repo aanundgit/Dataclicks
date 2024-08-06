@@ -6,14 +6,14 @@ from io import BytesIO
 
 # Page Configuration
 st.set_page_config(
-    page_title="Product Demos",
+    page_title="All Click by Click Demos",
     page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # Title and Horizontal Line
-st.title(":blue[Product Demos]")
+st.title(":blue[All Click by Click Demos]")
 st.write("Current Date:", date.today())
 st.markdown("""<hr style="height:2px;border:none;color:#317ae8;background-color:#317ae8;" /> """,
             unsafe_allow_html=True)
@@ -22,37 +22,125 @@ st.markdown("""<hr style="height:2px;border:none;color:#317ae8;background-color:
 if 'expand_all' not in st.session_state:
     st.session_state.expand_all = False
 
+
 def toggle_expand():
     st.session_state.expand_all = not st.session_state.expand_all
+
 
 # Maximize/Collapse All Button
 st.button("Maximize/Collapse All", on_click=toggle_expand)
 
 # Widget URLs
 widget_urls = [
-{"name":"Azure OpenAI Service Dream Demo for FSI","url":"https://regale.cloud/Microsoft/viewer/2723/azure-openai-service-dream-demo-for-fsi/index.html#/0/0"},
-    {"name":"Microsoft Fabric with Azure Machine Learning Dream Demo TDM+BDM","url":"https://regale.cloud/Microsoft/viewer/2705/microsoft-fabric-with-azure-machine-learning-dream-demo/index.html#/0/0"},
-    {"name":"PowerBI Differentiators Demo","url":"https://regale.cloud/Microsoft/viewer/2360/microsoft-fabric-end-to-end-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric end-to-end demo","url":"https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
-    {"name":"Modern Analytics with Microsoft Fabric and Azure Databricks DREAM Lab","url":"https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
-    {"name":"Modern Analytics with Azure Databricks and Power BI DREAM Demo (Partners)","url":"https://regale.cloud/Microsoft/viewer/2426/partners-modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
-    {"name":"Modern Analytics with Azure Databricks and Power BI DREAM Demo","url":"https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
-    {"name":"CosmosDB + OpenAI DREAM Demo","url":"https://regale.cloud/Microsoft/viewer/2493/cosmosdb-openai-dream-demo/index.html#/0/0"},
-    {"name":"Azure OpenAI Service Dream demo with shopping co-pilot.","url":"https://regale.cloud/Microsoft/viewer/2486/azure-openai-service-dream-demo-with-shopping-co-pilot/index.html#/0/0"},
-    {"name":"Azure OpenAI Service Dream Demo 10-minute","url":"https://regale.cloud/Microsoft/viewer/2383/azure-openai-service-dream-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric Dream Demo (10 minute)","url":"https://regale.cloud/Microsoft/viewer/2466/microsoft-fabric-dream-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric Dream Demo (5 minute)","url":"https://regale.cloud/Microsoft/viewer/2411/microsoft-fabric-dream-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric DREAM Demo (4 Minute) PARTNERS","url":"https://regale.cloud/Microsoft/viewer/2427/partners-microsoft-fabric-dream-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric DREAM Demo (4 Minute)","url":"https://regale.cloud/Microsoft/viewer/2379/microsoft-fabric-dream-demo/index.html#/0/0"},
-    {"name":"Azure OpenAI Service Dream Demo (with admin tool) 10-minute","url":"https://regale.cloud/Microsoft/viewer/2376/azure-openai-service-dream-demo-with-admin-tool/index.html#/0/0"},
-    {"name":"Microsoft Fabric Embedded Demo","url":"https://regale.cloud/Microsoft/viewer/2262/microsoft-fabric-embedded-demo/index.html#/0/0"},
-    {"name":"Microsoft Fabric and Azure Databricks DREAM Demo","url":"https://simdemo.azureedge.net/dai/fabric-databricks/index.html#/0/0"},
-    {"name":"Microsoft Fabric and Azure Databricks DREAM Demo (Partners)","url":"https://regale.cloud/Microsoft/viewer/2428/partners-microsoft-fabric-and-azure-databricks-dream-demo/index.html#/0/0"},
-    {"name":"Azure Databricks and Microsoft Fabric DREAM Demo (booth)","url":"https://regale.cloud/Microsoft/viewer/2303/azure-databricks-and-microsoft-fabric-dream-demo-booth/index.html#/0/0"},
-    {"name":"Power BI Differentiators Dream Demo Full Click by Click","url":"https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
-    {"name":"Analytics in MIDP Dream Demo for BDMs","url":"https://regale.cloud/Microsoft/viewer/2006/analytics-in-midp-dream-demo-for-bdms/index.html#/0/0"},
-    {"name":"Power BI Differentiators Dream Demo Full Click by Click V2","url":"https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"}
-   
+    {"name": "Azure OpenAI Service Dream Demo for FSI",
+        "url": "https://regale.cloud/Microsoft/viewer/2723/azure-openai-service-dream-demo-for-fsi/index.html#/0/0"},
+    {"name": "Microsoft Fabric with Azure Machine Learning Dream Demo TDM+BDM",
+        "url": "https://regale.cloud/Microsoft/viewer/2705/microsoft-fabric-with-azure-machine-learning-dream-demo/index.html#/0/0"},
+    {"name": "PowerBI Differentiators Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2360/microsoft-fabric-end-to-end-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric end-to-end demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
+    {"name": "Modern Analytics with Microsoft Fabric and Azure Databricks DREAM Lab",
+        "url": "https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
+    {"name": "Modern Analytics with Azure Databricks and Power BI DREAM Demo (Partners)",
+     "url": "https://regale.cloud/Microsoft/viewer/2426/partners-modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+    {"name": "Modern Analytics with Azure Databricks and Power BI DREAM Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+    {"name": "CosmosDB + OpenAI DREAM Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2493/cosmosdb-openai-dream-demo/index.html#/0/0"},
+    {"name": "Azure OpenAI Service Dream demo with shopping co-pilot.",
+        "url": "https://regale.cloud/Microsoft/viewer/2486/azure-openai-service-dream-demo-with-shopping-co-pilot/index.html#/0/0"},
+    {"name": "Azure OpenAI Service Dream Demo 10-minute",
+        "url": "https://regale.cloud/Microsoft/viewer/2383/azure-openai-service-dream-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric Dream Demo (10 minute)",
+     "url": "https://regale.cloud/Microsoft/viewer/2466/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric Dream Demo (5 minute)",
+     "url": "https://regale.cloud/Microsoft/viewer/2411/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric DREAM Demo (4 Minute) PARTNERS",
+     "url": "https://regale.cloud/Microsoft/viewer/2427/partners-microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric DREAM Demo (4 Minute)",
+     "url": "https://regale.cloud/Microsoft/viewer/2379/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": "Azure OpenAI Service Dream Demo (with admin tool) 10-minute",
+     "url": "https://regale.cloud/Microsoft/viewer/2376/azure-openai-service-dream-demo-with-admin-tool/index.html#/0/0"},
+    {"name": "Microsoft Fabric Embedded Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2262/microsoft-fabric-embedded-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric and Azure Databricks DREAM Demo",
+        "url": "https://simdemo.azureedge.net/dai/fabric-databricks/index.html#/0/0"},
+    {"name": "Microsoft Fabric and Azure Databricks DREAM Demo (Partners)",
+     "url": "https://regale.cloud/Microsoft/viewer/2428/partners-microsoft-fabric-and-azure-databricks-dream-demo/index.html#/0/0"},
+    {"name": "Azure Databricks and Microsoft Fabric DREAM Demo (booth)",
+     "url": "https://regale.cloud/Microsoft/viewer/2303/azure-databricks-and-microsoft-fabric-dream-demo-booth/index.html#/0/0"},
+    {"name": "Power BI Differentiators Dream Demo Full Click by Click",
+        "url": "https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
+    {"name": "Analytics in MIDP Dream Demo for BDMs",
+        "url": "https://regale.cloud/Microsoft/viewer/2006/analytics-in-midp-dream-demo-for-bdms/index.html#/0/0"},
+    {"name": "Power BI Differentiators Dream Demo Full Click by Click V2","url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
+    {"name": "Azure OpenAI Service DREAM Demo (with admin tool) 10-minute","url": "https://regale.cloud/Microsoft/viewer/2376/azure-openai-service-dream-demo-with-admin-tool/index.html#/0/0"},
+    {"name": ":Demo1 :", "url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
+    {"name": ":Demo2 :", "url": "https://regale.cloud/Microsoft/viewer/2006/analytics-in-midp-dream-demo-for-bdms/index.html#/0/0"},
+    {"name": ":Demo3 :", "url": "https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
+    {"name": ":Demo4 :", "url": "https://regale.cloud/Microsoft/viewer/2111/power-bi-differentiators-dream-demo-full-click-by-click-v2-draft/index.html#/0/0"},
+    {"name": ":Demo5 :", "url": "https://regale.cloud/Microsoft/viewer/2214/healthcare-dream-demo-for-bdm/index.html#/0/0"},
+    {"name": ":Demo6 :", "url": "https://regale.cloud/Microsoft/viewer/2217/customer-insights-for-retail-industry-dream-demo/index.html#/0/0"},
+    {"name": ":Demo7 :", "url": "https://regale.cloud/Microsoft/viewer/2218/customer-insights-for-financial-services-industry-dream-demo/index.html#/0/0"},
+    {"name": ":Demo8 :", "url": "https://regale.cloud/Microsoft/viewer/2221/healthcare-dream-demo-for-tdm/index.html#/0/0"},
+    {"name": ":Demo9 :", "url": "https://regale.cloud/Microsoft/viewer/2249/consumer-goods-dream-demo/index.html#/0/0"},
+    {"name": ":Demo10: ", "url": "https://regale.cloud/Microsoft/viewer/2262/microsoft-fabric-embedded-demo/index.html#/0/0"},
+    {"name": ":Demo11:", "url": "https://regale.cloud/Microsoft/viewer/2303/azure-databricks-and-microsoft-fabric-dream-demo-booth/index.html#/0/0"},
+    {"name": ":Demo12:", "url": "https://regale.cloud/Microsoft/viewer/2360/microsoft-fabric-end-to-end-demo/index.html#/0/0"},
+    {"name": ":Demo13:", "url": "https://regale.cloud/Microsoft/viewer/2376/azure-openai-service-dream-demo-with-admin-tool/index.html#/0/0"},
+    {"name": ":Demo14:", "url": "https://regale.cloud/Microsoft/viewer/2379/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": ":Demo15:", "url": "https://regale.cloud/Microsoft/viewer/2383/azure-openai-service-dream-demo/index.html#/0/0"},
+    {"name": ":Demo16:", "url": "https://regale.cloud/Microsoft/viewer/2411/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": ":Demo17:", "url": "https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+    {"name": ":Demo18:", "url": "https://regale.cloud/Microsoft/viewer/2426/partners-modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+    {"name": ":Demo19:", "url": "https://regale.cloud/Microsoft/viewer/2427/partners-microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": ":Demo20:", "url": "https://regale.cloud/Microsoft/viewer/2428/partners-microsoft-fabric-and-azure-databricks-dream-demo/index.html#/0/0"},
+    {"name": ":Demo21:", "url": "https://simdemo.azureedge.net/dai/fabric-databricks/index.html#/0/0"},
+    {"name": ":Demo22:", "url": "https://regale.cloud/Microsoft/viewer/2466/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": ":Demo23:", "url": "https://regale.cloud/Microsoft/viewer/2486/azure-openai-service-dream-demo-with-shopping-co-pilot/index.html#/0/0"},
+    {"name": ":Demo24:", "url": "https://regale.cloud/Microsoft/viewer/2493/cosmosdb-openai-dream-demo/index.html#/0/0"},
+    {"name": ":Demo25:", "url": "https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
+    {"name": ":Demo26:", "url": "https://regale.cloud/Microsoft/viewer/2705/microsoft-fabric-with-azure-machine-learning-dream-demo/index.html#/0/0"},
+    {"name": ":Demo27:", "url": "https://regale.cloud/Microsoft/viewer/2723/azure-openai-service-dream-demo-for-fsi/index.html#/0/0"},
+    {"name": ":Demo28:", "url": "https://regale.cloud/Microsoft/viewer/2772/microsoft-fabric-and-copilot-for-power-bi/index.html#/0/0"},
+    {"name": ":Demo29:", "url": "https://regale.cloud/Microsoft/viewer/2777/intelligent-apps-azure-cosmos-db-and-azure-openai-dream-demo-bdm-tdm/index.html#/0/0"},
+    {"name": ":Demo30:", "url": "https://regale.cloud/Microsoft/viewer/2852/microsoft-fabric-20-dream-demo/index.html#/0/0"},
+    {"name": ":Demo31:", "url": "https://regale.cloud/Microsoft/viewer/2857/education-dream-demo-bdm/index.html#/0/0"},
+    {"name": ":Demo32:", "url": "https://regale.cloud/Microsoft/viewer/2919/copilot-for-power-bi-in-microsoft-fabric-presenter-view-portuguese-version/index.html#/0/0"},
+    {"name": ":Demo33:", "url": "https://regale.cloud/Microsoft/viewer/2938/modern-analytics-with-azure-databricks-21/index.html#/0/0"},
+    {"name": ":Demo34:", "url": "https://regale.cloud/Microsoft/viewer/2939/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-versi/index.html#/0/0"},
+    {"name": ":Demo35:", "url": "https://regale.cloud/Microsoft/viewer/2940/modern-analytics-with-azure-databricks-22-power-bi-version/index.html#/0/0"},
+    {"name": ":Demo36:", "url": "https://regale.cloud/Microsoft/viewer/2961/education-dream-demo-bdm-partners/index.html#/0/0"},
+    {"name": ":Demo37:", "url": "https://regale.cloud/Microsoft/viewer/2968/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-germa/index.html#/0/0"},
+    {"name": ":Demo38:", "url": "https://regale.cloud/Microsoft/viewer/2976/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-itali/index.html"},
+    {"name": ":Demo39:", "url": "https://regale.cloud/Microsoft/viewer/3004/copilot-for-power-bi-in-microsoft-fabric-manufacturing-hmi-dream-demo-backend-on/index.html#/0/0"},
+    {"name": ":Demo40:", "url": "https://regale.cloud/Microsoft/viewer/3010/copilot-for-power-bi-in-microsoft-fabric-manufacturing-hmi-dream-demo-full-demo/index.html#/0/0"},
+    {"name": ":Demo41:", "url": "https://regale.cloud/Microsoft/viewer/3023/copilot-for-power-bi-in-microsoft-fabric-manufacturing-dream-demo-backend-copilo/index.html#/0/0"},
+    {"name": ":Demo42:", "url": "https://regale.cloud/Microsoft/viewer/3050/rag-databricks/index.html#/0/0"},
+    {"name": ":Demo43:", "url": "https://regale.cloud/Microsoft/viewer/3063/task-21-explore-delta-live-table-pipeline-data-transformation/index.html#/0/0"},
+    {"name": ":Demo44:", "url": "https://regale.cloud/Microsoft/viewer/3066/task-22-explore-the-data-in-azure-databricks-environment-with-unity-catalog/index.html#/0/0"},
+    {"name": ":Demo45:", "url": "https://regale.cloud/Microsoft/viewer/3073/task-13-use-the-new-shortcut-option-from-external-data-sources/index.html#/0/0"},
+    {"name": ":Demo46:", "url": "https://regale.cloud/Microsoft/viewer/3074/task-11-use-the-data-pipelines-data-flow-no-code-low-code-experience/index.html#/0/0"},
+    {"name": ":Demo47:", "url": "https://regale.cloud/Microsoft/viewer/3075/task-31-create-semantic-model-and-generate-insights-using-copilot-for-power-bi/index.html#/0/0"},
+    {"name": ":Demo48:", "url": "https://regale.cloud/Microsoft/viewer/3078/task-12-transform-data-using-dataflow-gen2-no-code-low-code-experience-copilot/index.html#/0/0"},
+    {"name": ":Demo49:", "url": "https://regale.cloud/Microsoft/viewer/3079/task-41-ingest-real-time-historical-data-into-kql-db-using-eventstream/index.html#/0/0"},
+    {"name": ":Demo50:", "url": "https://regale.cloud/Microsoft/viewer/3084/task-42-analyze-discover-patterns-identify-anomalies-and-outliers-using-copilot/index.html#/0/0"},
+    {"name": ":Demo51:", "url": "https://regale.cloud/Microsoft/viewer/3085/task-51-build-ml-models-experiments-and-log-ml-model-in-the-built-in-model-regis/index.html#/0/10"},
+    {"name": ":Demo52:", "url": "https://regale.cloud/Microsoft/viewer/3088/modern-analytics-with-microsoft-fabric-copilot-and-azure-databricks-dream-lab-fu/index.html#/0/0"},
+    {"name": ":Demo53:", "url": "https://regale.cloud/Microsoft/viewer/3176/snowflake-dream-demo-bdm/index.html#/0/0"},
+    {"name": ":Demo54:", "url": "https://regale.cloud/Microsoft/viewer/3189/azure-openai-dream-demo-for-fis/index.html#/0/0"},
+    {"name": ":Demo55:", "url": "https://regale.cloud/Microsoft/viewer/3247/microsoft-fabric-databricks-20/index.html#/0/0"},
+    {"name": ":Demo56:", "url": "https://regale.cloud/Microsoft/play/3273/sustainability-20-dream-demo#/0/0"},
+    {"name": ":Demo57:", "url": "https://regale.cloud/microsoft/play/3306/better-together-microsoft-fabric-with-azure-ai-studio-dream-demo#/:0/:0"}
+
+
+
+
+
+
+
+
 ]
 
 # Placeholder image URL
@@ -63,11 +151,14 @@ if 'maximized_widget' not in st.session_state:
     st.session_state.maximized_widget = None
 
 # Function to handle maximizing an iframe
+
+
 def toggle_maximize(widget_name):
     if st.session_state.maximized_widget == widget_name:
         st.session_state.maximized_widget = None
     else:
         st.session_state.maximized_widget = widget_name
+
 
 # Custom CSS for styling and responsiveness
 st.markdown(
@@ -168,6 +259,8 @@ st.markdown(
 )
 
 # Placeholder function to render iframes or images
+
+
 def render_iframe_or_image(url, height='300px'):
     try:
         st.markdown(f'''
@@ -178,6 +271,7 @@ def render_iframe_or_image(url, height='300px'):
     except:
         st.image(placeholder_img_url, caption="Preview Not Available")
 
+
 # Two-column layout for widget containers
 col1, col2 = st.columns(2)
 columns = [col1, col2]
@@ -185,7 +279,8 @@ current_col = 0
 
 for i, widget in enumerate(widget_urls):
     with columns[current_col].expander(widget['name'], expanded=st.session_state.expand_all):
-        st.button("Maximize", on_click=toggle_maximize, args=(widget['name'],), key=f"maximize-{widget['name']}")
+        st.button("Maximize", on_click=toggle_maximize, args=(
+            widget['name'],), key=f"maximize-{widget['name']}")
 
         if st.session_state.maximized_widget == widget['name']:
             # Display the modal for the maximized widget
@@ -207,44 +302,7 @@ for i, widget in enumerate(widget_urls):
     current_col = (current_col + 1) % 2
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#--------------------------------------------------old code with three column format ----------------------------
+# --------------------------------------------------old code with three column format ----------------------------
 # import streamlit as st
 # from datetime import date
 # from PIL import Image
@@ -318,8 +376,6 @@ for i, widget in enumerate(widget_urls):
 
 
 # ]
-
-
 
 
 # # Columns
@@ -600,23 +656,23 @@ for i, widget in enumerate(widget_urls):
 #         padding: 0; /* Ensure no extra padding around iframe */
 #     }
 #     .modal {
-#         display: none; 
-#         position: fixed; 
-#         z-index: 1000; 
-#         left: 0; 
-#         top: 0; 
-#         width: 100%; 
-#         height: 100%; 
-#         overflow: auto; 
-#         background-color: rgba(0,0,0,0.5); 
+#         display: none;
+#         position: fixed;
+#         z-index: 1000;
+#         left: 0;
+#         top: 0;
+#         width: 100%;
+#         height: 100%;
+#         overflow: auto;
+#         background-color: rgba(0,0,0,0.5);
 #     }
 #     .modal-content {
-#         background-color: #fff; 
-#         margin: 5% auto; 
-#         padding: 20px; 
-#         border: 1px solid #888; 
-#         width: 90%; 
-#         max-width: 900px; 
+#         background-color: #fff;
+#         margin: 5% auto;
+#         padding: 20px;
+#         border: 1px solid #888;
+#         width: 90%;
+#         max-width: 900px;
 #         border-radius: 12px;
 #         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 #     }
@@ -644,7 +700,6 @@ for i, widget in enumerate(widget_urls):
 #     </style>
 #     """,
 #     unsafe_allow_html=True
-
 
 
 # )
