@@ -1,0 +1,24 @@
+numpy < 1.23.4
+#openai==1.3.3
+pandas < 1.5.1
+Pillow < 10.0.1
+#pygwalker < 0.3.6
+pytz < 2020.5
+#streamlit==1.23.1
+#streamlit_drawable_canvas < 0.9.3
+#streamlit_extras < 0.3.2
+#streamlit_player < 0.1.5
+altair < 5
+#snowflake
+#snowflake-connector-python==3.2.0
+#snowflake_connector_python==2.7.9
+#snowflake-snowpark-python==0.12.0
+streamlit
+openai
+snowflake
+pygwalker
+streamlit_drawable_canvas
+streamlit_player
+streamlit_extras
+snowflake-connector-python
+extra-streamlit-components
