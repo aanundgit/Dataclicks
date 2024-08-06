@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Title and Horizontal Line
-st.title(":black[Microsoft Power BI Demos]")
+st.title(":green[Microsoft Power BI Demos]")
 st.write("Current Date:", date.today())
 st.markdown("""<hr style="height:2px;border:none;color:#F4C430;background-color:#F4C430;" /> """,
             unsafe_allow_html=True)
@@ -180,9 +180,9 @@ for i, widget in enumerate(widget_urls):
             st.markdown(
                 f"""
                 <div class="modal" style="display:block;">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 95%; max-width: 1200px;">
                         <span class="close" onclick="window.location.reload();">&times;</span>
-                        <iframe src="{widget['url']}" width="100%" height="500px" frameborder="0" allowfullscreen></iframe>
+                        <iframe src="{widget['url']}" width="100%" height="700px" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
                 """,

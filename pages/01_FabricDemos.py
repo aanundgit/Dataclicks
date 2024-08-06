@@ -210,9 +210,9 @@ for i, widget in enumerate(widget_urls):
             st.markdown(
                 f"""
                 <div class="modal" style="display:block;">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 95%; max-width: 1200px;">
                         <span class="close" onclick="window.location.reload();">&times;</span>
-                        <iframe src="{widget['url']}" width="100%" height="500px" frameborder="0" allowfullscreen></iframe>
+                        <iframe src="{widget['url']}" width="100%" height="700px" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
                 """,
