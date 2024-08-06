@@ -54,9 +54,12 @@ def top_navigation():
     
     <div class="topnav">
         <a class="active" href="#home">Home</a>
-        <a href="https://app.fabric.microsoft.com/singleSignOn?ru=https%3A%2F%2Fapp.fabric.microsoft.com%2Fhome%3FnoSignUpCheck%3D1" target="_blank">Microsoft Fabric Blog</a>
+        <a href="https://blog.fabric.microsoft.com/en-US/blog/" target="_blank">Microsoft Fabric Blog</a>
+        <a href="https://www.microsoft.com/en-us/microsoft-fabric/partners" target="_blank">Microsoft Fabric Partners</a>
         <a href="https://powerbi.microsoft.com/en-us/blog/" target="_blank">Microsoft Power BI Blog</a>
-        <a href="https://www.github.com" target="_blank">GitHub</a>
+        <a href="https://app.powerbi.com" target="_blank">Power BI</a>
+        <a href="https://github.com/microsoft/Azure-Analytics-and-AI-Engagement" target="_blank">GitHub</a>
+        <a href="https://partner.microsoft.com/en-us/asset/collection/industry-dream-demos-and-dream-demo-in-a-box#/" target="_blank">Partner Portal</a>
     </div>
     """, unsafe_allow_html=True)
     

@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Title and Horizontal Line
-st.title(":yellow[Microsoft Power BI Demos]")
+st.title(":black[Microsoft Power BI Demos]")
 st.write("Current Date:", date.today())
 st.markdown("""<hr style="height:2px;border:none;color:#F4C430;background-color:#F4C430;" /> """,
             unsafe_allow_html=True)
