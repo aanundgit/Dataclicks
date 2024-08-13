@@ -25,10 +25,16 @@ if 'expand_all' not in st.session_state:
 
 def toggle_expand():
     st.session_state.expand_all = not st.session_state.expand_all
+def update_search_query():
+    st.session_state.search_query = st.session_state.search_input
 
+# Search Box
+st.text_input("Search Widgets", key='search_input', on_change=update_search_query)
 
 # Maximize/Collapse All Button
 st.button("Maximize/Collapse All", on_click=toggle_expand)
+
+
 
 # Widget URLs
 widget_urls = [
@@ -143,12 +149,19 @@ widget_urls = [
 
 ]
 
+# Filter widgets based on search query
+filtered_widget_urls = [widget for widget in widget_urls if st.session_state.search_query.lower() in widget['name'].lower()]
+
 # Placeholder image URL
 placeholder_img_url = "https://via.placeholder.com/300"
 
 # Initialize session state attributes if they don't exist
 if 'maximized_widget' not in st.session_state:
     st.session_state.maximized_widget = None
+
+
+
+
 
 # Function to handle maximizing an iframe
 
