@@ -2,6 +2,46 @@ import streamlit as st
 from datetime import date, timedelta
 # from streamlit_extras.colored_header import colored_header
 import pytz
+# import hmac
+
+# #--- authenticate with password ---
+
+# def check_password():
+#     """Returns `True` if the user had the correct password."""
+
+#     def password_entered():
+#         """Checks whether a password entered by the user is correct."""
+#         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+#             st.session_state["password_correct"] = True
+#             del st.session_state["password"]  # Don't store the password.
+#         else:
+#             st.session_state["password_correct"] = False
+
+#     # Return True if the password is validated.
+#     if st.session_state.get("password_correct", False):
+#         return True
+
+#     # Show input for password.
+#     st.text_input(
+#         "Password", type="password", on_change=password_entered, key="password"
+#     )
+#     if "password_correct" in st.session_state:
+#         st.error("😕 Password incorrect")
+#     return False
+
+
+# if not check_password():
+#     st.stop()  # Do not continue if check_password is not True.
+
+# # Main Streamlit app starts here
+# st.write("Here goes your normal Streamlit app...")
+# st.button("Click me")
+
+
+
+
+
+
 
 
 st.set_page_config(
@@ -245,7 +285,7 @@ st.markdown("""
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         position: relative;
     }
-    .close-btn {
+    .refreshbrowser-btn {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -291,7 +331,7 @@ if st.session_state.maximized_widget:
         f"""
         <div class="overlay">
             <div class="iframe-container">
-                <button class="close-btn" onclick="window.location.reload();">Close</button>
+                <button class="refreshbrowser-btn" onclick="window.location.reload();">refreshbrowser</button>
                 <iframe src="{widget['url']}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 <a href="#" class="back-link" onclick="window.location.reload();">Back to Home</a>
             </div>

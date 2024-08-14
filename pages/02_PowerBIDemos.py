@@ -3,6 +3,42 @@ from datetime import date
 from PIL import Image
 import requests
 from io import BytesIO
+# import hmac
+
+# #--- authenticate with password ---
+
+# def check_password():
+#     """Returns `True` if the user had the correct password."""
+
+#     def password_entered():
+#         """Checks whether a password entered by the user is correct."""
+#         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+#             st.session_state["password_correct"] = True
+#             del st.session_state["password"]  # Don't store the password.
+#         else:
+#             st.session_state["password_correct"] = False
+
+#     # Return True if the password is validated.
+#     if st.session_state.get("password_correct", False):
+#         return True
+
+#     # Show input for password.
+#     st.text_input(
+#         "Password", type="password", on_change=password_entered, key="password"
+#     )
+#     if "password_correct" in st.session_state:
+#         st.error("😕 Password incorrect")
+#     return False
+
+
+# if not check_password():
+#     st.stop()  # Do not continue if check_password is not True.
+
+# # Main Streamlit app starts here
+# st.write("Here goes your normal Streamlit app...")
+# st.button("Click me")
+
+
 
 # Page Configuration
 st.set_page_config(
@@ -13,17 +49,43 @@ st.set_page_config(
 )
 
 # Title and Horizontal Line
-st.title(":green[Microsoft Power BI Demos]")
-st.write("Current Date:", date.today())
+
+st.markdown(
+    """
+    <style>
+    .custom-title {
+        color: #F4C300;  /* Saffron yellow color */
+        font-size: 36px;
+        font-weight: bold;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Display the title with custom styling
+st.markdown('<p class="custom-title">Microsoft Power BI Demos </p>', unsafe_allow_html=True)
+st.write("Current Date:", date.today()) 
 st.markdown("""<hr style="height:2px;border:none;color:#F4C430;background-color:#F4C430;" /> """,
             unsafe_allow_html=True)
+#st.title(":yellow[Microsoft Power BI Demos]")
+#st.write("Current Date:", date.today())
+#st.markdown("""<hr style="height:2px;border:none;color:#158237;background-color:#158237;" /> """, unsafe_allow_html=True)
 
 # State to toggle expand/collapse
 if 'expand_all' not in st.session_state:
     st.session_state.expand_all = False
+if 'search_query' not in st.session_state:
+    st.session_state.search_query = ''
 
 def toggle_expand():
     st.session_state.expand_all = not st.session_state.expand_all
+
+def update_search_query():
+    st.session_state.search_query = st.session_state.search_input
+
+# Search Box
+st.text_input("Search Widgets", key='search_input', on_change=update_search_query)
 
 # Maximize/Collapse All Button
 st.button("Maximize/Collapse All", on_click=toggle_expand)
@@ -31,102 +93,63 @@ st.button("Maximize/Collapse All", on_click=toggle_expand)
 # Widget URLs
 widget_urls = [
     
-{"name": "Power BI Guided Tour",
-"url": "https://guidedtour.microsoft.com/en-us/guidedtour/microsoft-fabric/microsoft-fabric/1/1"},
+{"name": "Power BI Guided Tour","url": "https://guidedtour.microsoft.com/en-us/guidedtour/microsoft-fabric/microsoft-fabric/1/1"},
 {"name": "Partner Portal", "url": "https://partner.microsoft.com/en-us/asset/collection/industry-dream-demos-and-dream-demo-in-a-box#/"},
-{"name": "Power BI Differentiators DREAM Demo Integrated into Web App",
-"url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
+{"name": "Power BI Differentiators DREAM Demo Integrated into Web App","url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
 {"name": "Power BI Differentiators DREAM Demo Full Click by Click", "url": "https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
 {"name": "Modern Analytics with Azure Databricks and Power BI DREAM Demo","url": "https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
-{"name": "Task 3.1: Create a Semantic model and generate insights using Copilot for Power BI","url": "https://regale.cloud/Microsoft/viewer/3075/task-31-create-semantic-model-and-generate-insights-using-copilot-for-power-bi/index.html#/0/0"}   
+{"name": "Semantic model and Copilot for Power BI","url": "https://regale.cloud/Microsoft/viewer/3075/task-31-create-semantic-model-and-generate-insights-using-copilot-for-power-bi/index.html#/0/0"}   
+ 
     
-
 ]
+
+# Filter widgets based on search query
+filtered_widget_urls = [widget for widget in widget_urls if st.session_state.search_query.lower() in widget['name'].lower()]
+
+# Columns layout
+cols = st.columns(2)
 
 # Placeholder image URL
 placeholder_img_url = "https://via.placeholder.com/300"
-
-# Initialize session state attributes if they don't exist
-if 'maximized_widget' not in st.session_state:
-    st.session_state.maximized_widget = None
-
-# Function to handle maximizing an iframe
-def toggle_maximize(widget_name):
-    if st.session_state.maximized_widget == widget_name:
-        st.session_state.maximized_widget = None
-    else:
-        st.session_state.maximized_widget = widget_name
 
 # Custom CSS for styling and responsiveness
 st.markdown(
     """
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-    }
-    .stButton button {
-        width: 100%;
-        background-color: #F4C430;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .stButton button:hover {
-        background-color: #0d6a3b;
-    }
-    .st-expander {
-        border: 1px solid #F4C430;
-        border-radius: 12px;
-        background-color: #ffffff;
-        margin-bottom: 20px;
-    }
-    .st-expander__header {
-        font-size: 1.1em;
-        font-weight: bold;
-        color: #F4C430;
-        padding: 10px 0;
-        text-align: center;
-    }
-    .st-expander__content {
-        padding: 0 10px 10px 10px;
-    }
     .iframe-container {
         position: relative;
         width: 100%;
-        padding-top: 56.25%;
-        margin-bottom: 10px;
+        height: 300px;
+        padding: 5px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
     }
     .iframe-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
         border: none;
         border-radius: 12px;
     }
     .modal {
-        display: none; 
-        position: fixed; 
-        z-index: 1000; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-        height: 100%; 
-        overflow: auto; 
-        background-color: rgba(0,0,0,0.5); 
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
     }
     .modal-content {
-        background-color: #fff; 
-        margin: 5% auto; 
-        padding: 20px; 
-        border: 1px solid #888; 
-        width: 90%; 
-        max-width: 900px; 
+        background-color: #fff;
+        margin: 2% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 95%;
+        max-width: 1200px;
         border-radius: 12px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
@@ -135,6 +158,7 @@ st.markdown(
         float: right;
         font-size: 28px;
         font-weight: bold;
+        cursor: pointer;
     }
     .close:hover,
     .close:focus {
@@ -142,20 +166,23 @@ st.markdown(
         text-decoration: none;
         cursor: pointer;
     }
-    @media (max-width: 768px) {
-        .modal-content {
-            width: 95%;
-        }
-        .iframe-container {
-            padding-top: 75%;
-        }
-    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Placeholder function to render iframes or images
+# Function to handle maximizing an iframe
+def toggle_maximize(widget_name):
+    if st.session_state.maximized_widget == widget_name:
+        st.session_state.maximized_widget = None
+    else:
+        st.session_state.maximized_widget = widget_name
+
+# Initialize session state attributes if they don't exist
+if 'maximized_widget' not in st.session_state:
+    st.session_state.maximized_widget = None
+
+# Function to render the iframe or placeholder image
 def render_iframe_or_image(url, height='300px'):
     try:
         st.markdown(f'''
@@ -166,13 +193,10 @@ def render_iframe_or_image(url, height='300px'):
     except:
         st.image(placeholder_img_url, caption="Preview Not Available")
 
-# Two-column layout for widget containers
-col1, col2 = st.columns(2)
-columns = [col1, col2]
+# Iterate over filtered widgets and display them
 current_col = 0
-
-for i, widget in enumerate(widget_urls):
-    with columns[current_col].expander(widget['name'], expanded=st.session_state.expand_all):
+for i, widget in enumerate(filtered_widget_urls):
+    with cols[current_col].expander(widget['name'], expanded=st.session_state.expand_all):
         st.button("Maximize", on_click=toggle_maximize, args=(widget['name'],), key=f"maximize-{widget['name']}")
 
         if st.session_state.maximized_widget == widget['name']:
@@ -180,7 +204,7 @@ for i, widget in enumerate(widget_urls):
             st.markdown(
                 f"""
                 <div class="modal" style="display:block;">
-                    <div class="modal-content" style="width: 95%; max-width: 1200px;">
+                    <div class="modal-content">
                         <span class="close" onclick="window.location.reload();">&times;</span>
                         <iframe src="{widget['url']}" width="100%" height="700px" frameborder="0" allowfullscreen></iframe>
                     </div>
@@ -193,6 +217,204 @@ for i, widget in enumerate(widget_urls):
 
     # Toggle column for next widget
     current_col = (current_col + 1) % 2
+
+# Code with out search box
+
+# import streamlit as st
+# from datetime import date
+# from PIL import Image
+# import requests
+# from io import BytesIO
+
+# # Page Configuration
+# st.set_page_config(
+#     page_title="Microsoft Power BI Demos",
+#     page_icon="",
+#     layout="wide",
+#     initial_sidebar_state="collapsed"
+# )
+
+# # Title and Horizontal Line
+# st.title(":green[Microsoft Power BI Demos]")
+# st.write("Current Date:", date.today())
+# st.markdown("""<hr style="height:2px;border:none;color:#F4C430;background-color:#F4C430;" /> """,
+#             unsafe_allow_html=True)
+
+# # State to toggle expand/collapse
+# if 'expand_all' not in st.session_state:
+#     st.session_state.expand_all = False
+
+# def toggle_expand():
+#     st.session_state.expand_all = not st.session_state.expand_all
+
+# # Maximize/Collapse All Button
+# st.button("Maximize/Collapse All", on_click=toggle_expand)
+
+# # Widget URLs
+# widget_urls = [
+    
+# {"name": "Power BI Guided Tour",
+# "url": "https://guidedtour.microsoft.com/en-us/guidedtour/microsoft-fabric/microsoft-fabric/1/1"},
+# {"name": "Partner Portal", "url": "https://partner.microsoft.com/en-us/asset/collection/industry-dream-demos-and-dream-demo-in-a-box#/"},
+# {"name": "Power BI Differentiators DREAM Demo Integrated into Web App",
+# "url": "https://regale.cloud/Microsoft/viewer/1947/power-bi-differentiators-dream-demo-integrated-into-web-app/index.html#/0/0"},
+# {"name": "Power BI Differentiators DREAM Demo Full Click by Click", "url": "https://regale.cloud/Microsoft/viewer/instance/2053/6338/index.html#/0/0"},
+# {"name": "Modern Analytics with Azure Databricks and Power BI DREAM Demo","url": "https://regale.cloud/Microsoft/viewer/2421/modern-analytics-with-azure-databricks-and-power-bi-dream-demo/index.html#/0/0"},
+# {"name": "Task 3.1: Create a Semantic model and generate insights using Copilot for Power BI","url": "https://regale.cloud/Microsoft/viewer/3075/task-31-create-semantic-model-and-generate-insights-using-copilot-for-power-bi/index.html#/0/0"}   
+    
+
+# ]
+
+# # Placeholder image URL
+# placeholder_img_url = "https://via.placeholder.com/300"
+
+# # Initialize session state attributes if they don't exist
+# if 'maximized_widget' not in st.session_state:
+#     st.session_state.maximized_widget = None
+
+# # Function to handle maximizing an iframe
+# def toggle_maximize(widget_name):
+#     if st.session_state.maximized_widget == widget_name:
+#         st.session_state.maximized_widget = None
+#     else:
+#         st.session_state.maximized_widget = widget_name
+
+# # Custom CSS for styling and responsiveness
+# st.markdown(
+#     """
+#     <style>
+#     body {
+#         font-family: Arial, sans-serif;
+#         background-color: #f5f5f5;
+#     }
+#     .stButton button {
+#         width: 100%;
+#         background-color: #F4C430;
+#         color: white;
+#         border: none;
+#         border-radius: 5px;
+#         padding: 10px;
+#         cursor: pointer;
+#         transition: background-color 0.3s;
+#     }
+#     .stButton button:hover {
+#         background-color: #0d6a3b;
+#     }
+#     .st-expander {
+#         border: 1px solid #F4C430;
+#         border-radius: 12px;
+#         background-color: #ffffff;
+#         margin-bottom: 20px;
+#     }
+#     .st-expander__header {
+#         font-size: 1.1em;
+#         font-weight: bold;
+#         color: #F4C430;
+#         padding: 10px 0;
+#         text-align: center;
+#     }
+#     .st-expander__content {
+#         padding: 0 10px 10px 10px;
+#     }
+#     .iframe-container {
+#         position: relative;
+#         width: 100%;
+#         padding-top: 56.25%;
+#         margin-bottom: 10px;
+#     }
+#     .iframe-container iframe {
+#         position: absolute;
+#         top: 0;
+#         left: 0;
+#         width: 100%;
+#         height: 100%;
+#         border: none;
+#         border-radius: 12px;
+#     }
+#     .modal {
+#         display: none; 
+#         position: fixed; 
+#         z-index: 1000; 
+#         left: 0; 
+#         top: 0; 
+#         width: 100%; 
+#         height: 100%; 
+#         overflow: auto; 
+#         background-color: rgba(0,0,0,0.5); 
+#     }
+#     .modal-content {
+#         background-color: #fff; 
+#         margin: 5% auto; 
+#         padding: 20px; 
+#         border: 1px solid #888; 
+#         width: 90%; 
+#         max-width: 900px; 
+#         border-radius: 12px;
+#         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+#     }
+#     .close {
+#         color: #aaa;
+#         float: right;
+#         font-size: 28px;
+#         font-weight: bold;
+#     }
+#     .close:hover,
+#     .close:focus {
+#         color: black;
+#         text-decoration: none;
+#         cursor: pointer;
+#     }
+#     @media (max-width: 768px) {
+#         .modal-content {
+#             width: 95%;
+#         }
+#         .iframe-container {
+#             padding-top: 75%;
+#         }
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
+
+# # Placeholder function to render iframes or images
+# def render_iframe_or_image(url, height='300px'):
+#     try:
+#         st.markdown(f'''
+#             <div class="iframe-container" style="height: {height};">
+#                 <iframe src="{url}" frameborder="0" allowfullscreen></iframe>
+#             </div>
+#         ''', unsafe_allow_html=True)
+#     except:
+#         st.image(placeholder_img_url, caption="Preview Not Available")
+
+# # Two-column layout for widget containers
+# col1, col2 = st.columns(2)
+# columns = [col1, col2]
+# current_col = 0
+
+# for i, widget in enumerate(widget_urls):
+#     with columns[current_col].expander(widget['name'], expanded=st.session_state.expand_all):
+#         st.button("Maximize", on_click=toggle_maximize, args=(widget['name'],), key=f"maximize-{widget['name']}")
+
+#         if st.session_state.maximized_widget == widget['name']:
+#             # Display the modal for the maximized widget
+#             st.markdown(
+#                 f"""
+#                 <div class="modal" style="display:block;">
+#                     <div class="modal-content" style="width: 95%; max-width: 1200px;">
+#                         <span class="close" onclick="window.location.reload();">&times;</span>
+#                         <iframe src="{widget['url']}" width="100%" height="700px" frameborder="0" allowfullscreen></iframe>
+#                     </div>
+#                 </div>
+#                 """,
+#                 unsafe_allow_html=True
+#             )
+#         else:
+#             render_iframe_or_image(widget['url'])
+
+#     # Toggle column for next widget
+#     current_col = (current_col + 1) % 2
 
 
 

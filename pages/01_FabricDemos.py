@@ -3,6 +3,58 @@ from datetime import date
 from PIL import Image
 import requests
 from io import BytesIO
+# import hmac
+
+# #--- authenticate with password ---
+
+# def check_password():
+#     """Returns `True` if the user had the correct password."""
+
+#     def password_entered():
+#         """Checks whether a password entered by the user is correct."""
+#         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
+#             st.session_state["password_correct"] = True
+#             del st.session_state["password"]  # Don't store the password.
+#         else:
+#             st.session_state["password_correct"] = False
+
+#     # Return True if the password is validated.
+#     if st.session_state.get("password_correct", False):
+#         return True
+
+#     # Show input for password.
+#     st.text_input(
+#         "Password", type="password", on_change=password_entered, key="password"
+#     )
+#     if "password_correct" in st.session_state:
+#         st.error("😕 Password incorrect")
+#     return False
+
+
+# if not check_password():
+#     st.stop()  # Do not continue if check_password is not True.
+
+# # Main Streamlit app starts here
+# st.write("Here goes your normal Streamlit app...")
+# st.button("Click me")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Page Configuration
 st.set_page_config(
@@ -37,11 +89,48 @@ st.button("Maximize/Collapse All", on_click=toggle_expand)
 
 # Widget URLs
 widget_urls = [
-    {"name": "Fabric-Guided Tour", "url": "https://guidedtour.microsoft.com/en-us/guidedtour/microsoft-fabric/microsoft-fabric/1/1"},
+    
+    {"name": "Fabric-Guided Tour","url": "https://guidedtour.microsoft.com/en-us/guidedtour/microsoft-fabric/microsoft-fabric/1/1"},
     {"name": "Fabric Blog", "url": "https://partner.microsoft.com/en-us/asset/collection/industry-dream-demos-and-dream-demo-in-a-box#/"},
-    {"name": "Fabric Full Demo", "url": "https://regale.cloud/Microsoft/viewer/2360/microsoft-fabric-end-to-end-demo/index.html#/0/0"},
-    # Add more widgets as needed...
+    {"name": "Fabric Full Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/2360/microsoft-fabric-end-to-end-demo/index.html#/0/0"},
+    {"name": "Fabric Ignite2023", "url": "https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
+    {"name": "Fabric Embedded",
+        "url": "https://regale.cloud/Microsoft/viewer/2262/microsoft-fabric-embedded-demo/index.html#/0/0"},
+    {"name": "Fabric+Databricks BoothDemo",
+        "url": "https://regale.cloud/Microsoft/viewer/2303/azure-databricks-and-microsoft-fabric-dream-demo-booth/index.html#/0/0"},
+    {"name": "Fabric End to End",
+        "url": "https://regale.cloud/Microsoft/viewer/2466/microsoft-fabric-dream-demo/index.html#/0/0"},
+    {"name": "Fabric+Azure Databricks Demo - Partners",
+        "url": "https://regale.cloud/Microsoft/viewer/2428/partners-microsoft-fabric-and-azure-databricks-dream-demo/index.html#/0/0"},
+    {"name": "MIDP with Microsoft Fabric and Azure Databricks DREAM Lab",
+        "url": "https://regale.cloud/Microsoft/viewer/2637/modern-analytics-with-microsoft-fabric-and-azure-databricks-dream-lab/index.html#/0/0"},
+    {"name": "Microsoft Fabric with Azure Machine Learning DREAM Demo TDM+BDM",
+        "url": "https://regale.cloud/Microsoft/viewer/2705/microsoft-fabric-with-azure-machine-learning-dream-demo/index.html#/0/0"},
+    {"name": "Microsoft Fabric - Copilot for Power BI",
+        "url": "https://regale.cloud/Microsoft/viewer/2772/microsoft-fabric-and-copilot-for-power-bi/index.html#/0/0"},
+    {"name": "Microsoft Fabric DREAM Demo 2.0",
+        "url": "https://regale.cloud/Microsoft/viewer/2852/microsoft-fabric-20-dream-demo/index.html#/0/0"},
+    {"name": "Copilot for Power BI in Microsoft Fabric 2 (Presenter mode) Portuguese version",
+     "url": "https://regale.cloud/Microsoft/viewer/2919/copilot-for-power-bi-in-microsoft-fabric-presenter-view-portuguese-version/index.html#/0/0"},
+    {"name": "Copilot for Power BI in Microsoft Fabric 2 (Presenter mode) English/Portuguese version",
+     "url": "https://regale.cloud/Microsoft/viewer/2939/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-versi/index.html#/0/0"},
+    {"name": "Copilot for Power BI in Microsoft Fabric 2 (Presenter mode) English/German version",
+     "url": "https://regale.cloud/Microsoft/viewer/2968/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-germa/index.html#/0/0"},
+    {"name": "Copilot-Power BI in Microsoft Fabric 2 (Presenter mode) English/Italian version",
+     "url": "https://regale.cloud/Microsoft/viewer/2976/copilot-for-power-bi-in-microsoft-fabric-dream-demo-presenter-view-english-itali/index.html"},
+    {"name": "Copilot-Power BI in Microsoft Fabric Manufacturing DREAM Demo (backend only)",
+     "url": "https://regale.cloud/Microsoft/viewer/3004/copilot-for-power-bi-in-microsoft-fabric-manufacturing-hmi-dream-demo-backend-on/index.html#/0/0"},
+    {"name": "Copilot-Power BI in Microsoft Fabric Manufacturing DREAM Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/3010/copilot-for-power-bi-in-microsoft-fabric-manufacturing-hmi-dream-demo-full-demo/index.html#/0/0"},
+    {"name": "Copilot-Power BI in Microsoft Fabric Manufacturing DREAM Demo (backend only) Copilot",
+     "url": "https://regale.cloud/Microsoft/viewer/3023/copilot-for-power-bi-in-microsoft-fabric-manufacturing-dream-demo-backend-copilo/index.html#/0/0"},
+    {"name": "Modern Analytics with Microsoft Fabric, Copilot, and Azure Databricks DREAM Lab FULL Demo",
+        "url": "https://regale.cloud/Microsoft/viewer/3088/modern-analytics-with-microsoft-fabric-copilot-and-azure-databricks-dream-lab-fu/index.html#/0/0"},
+    {"name": "Better Together - MS Fabric with Azure AI Studio DREAM Demo (BDM)",
+     "url": "https://regale.cloud/microsoft/play/3306/better-together-microsoft-fabric-with-azure-ai-studio-dream-demo#/0/0"}
 ]
+    
 
 # Filter widgets based on search query
 filtered_widget_urls = [widget for widget in widget_urls if st.session_state.search_query.lower() in widget['name'].lower()]
