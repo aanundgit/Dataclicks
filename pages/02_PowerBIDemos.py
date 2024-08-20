@@ -55,7 +55,7 @@ st.markdown(
     <style>
     .custom-title {
         color: #F4C300;  /* Saffron yellow color */
-        font-size: 36px;
+        font-size: 40px;
         font-weight: bold;
     }
     </style>
