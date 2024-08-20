@@ -72,22 +72,49 @@ st.markdown(
 )
 
 
-st.markdown('<p class="custom-title">Architecture Diagrams </p>', unsafe_allow_html=True)
-st.write("Current Date:", date.today()) 
+st.markdown('<p class="custom-title">Architecture Diagrams </p>',
+            unsafe_allow_html=True)
+st.write("Current Date:", date.today())
 st.markdown("""<hr style="height:2px;border:none;color:#324ab2;background-color:#324ab2;" /> """,
             unsafe_allow_html=True)
 
 images = [
-    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/daidemo_fabric_3_demo_arch_V2.gif", "name": "Fabric Demo Architecture 3.0"},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/fabric_2_demo_arch.gif", "name": "Fabric Demo Architecture 2.0"},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/snowflake/snowflake_demo_architecture.png", "name": "Snowflake Demo Architecture"},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/Fabric_ADB_Architecture_Diagram.gif", "name": "Fabric Azure Databricks Architecture "},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/purview_demo_arch_4.png", "name": "Purview Demo Architecture"},
-    {"url": "https://nrfcdn.azureedge.net/fab_db_2_arch_diagram.gif", "name": "Microsoft Fabric Databricks 2.0 Architecture"},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/manufacturing/Mfg_with_fabric_arch_1.gif", "name": "Manufacturing with Fabric Architecture"},
-    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/Fabric_AML_Arc.png", "name": "Fabric Azure AML Architecture"},
-    {"url": "https://nrfcdn.azureedge.net/mfdb2_onelake_architecture.png", "name": "Microsoft Fabric Databricks 2.0 Onelake Architecture"},
-    {"url": "https://nrfcdn.azureedge.net/mfigdb_onelake_architecture.gif", "name": "Microsoft Fabric Databricks Onelake Architecture"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/daidemo_fabric_3_demo_arch_V2.gif",
+        "name": "Fabric Demo Architecture 3"},
+    {"url": "https://fsi.azureedge.net/fsi_2_arch_diagram3.gif", "name": "FSI 2"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/Fabric_ADB_Architecture_Diagram.gif",
+        "name": "Fabric with AI Studio"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/openai/ai_first_outside_in_view_arch_diagram1.png",
+        "name": "Open AI Demo"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/snowflake/snowflake_demo_architecture.png", "name": "Snowflake"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/appspluscosmos/technical_reference_architecture.png", "name": "appCosmos"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/fabric_2_demo_arch.gif",
+        "name": "Fabric 2"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/Fabric_AML_Arc.png",
+        "name": "Fabric + AML"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/fabric_2_architecture.png",
+        "name": "Fabric 2+"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/openai/education_demo_architecture_diagram1.png", "name": "Education"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/sustainability/sustainability_2_0_arch_diagram.png",
+        "name": "Sustainability 2"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/sustainability/sustainability_smart_city_architecture.gif",
+        "name": "SmartCity-Sustainability"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/openai/fsi_arch_diagram.png",
+        "name": "FSI WealthAdvisor"},
+    {"url": "https://nrfcdn.azureedge.net/mfdb_onelake_architecture.gif",
+        "name": "Fabric + Azure Databricks"},
+    {"url": "https://nrfcdn.azureedge.net/mfdb2_onelake_architecture.png",
+        "name": "Fabric + Azure Databricks 2"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/fintaxdemo/images/bothpaths.gif", "name": "FinTax"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/sustainability/images/bothpaths1.gif",
+        "name": "Sustainability 1"},
+    {"url": "https://healthcare.azureedge.net/microsoft_analytics_solution_pattern.png",
+        "name": "HealthCare"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/manufacturing/Mfg_with_fabric_arch_1.gif",
+        "name": "Manufacturing with Fabric"},
+    {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/purview_demo_arch_4.png",
+        "name": "Purview Demo Architecture"}
+
 ]
 
 # Initialize the session state for image index
@@ -95,6 +122,8 @@ if 'current_index' not in st.session_state:
     st.session_state.current_index = 0
 
 # Function to display the carousel with the current image and name
+
+
 def display_carousel():
     image_url = images[st.session_state.current_index]['url']
     image_name = images[st.session_state.current_index]['name']
@@ -109,6 +138,7 @@ def display_carousel():
         unsafe_allow_html=True
     )
 
+
 # Display the carousel
 display_carousel()
 
@@ -116,11 +146,13 @@ display_carousel()
 col1, col2 = st.columns([1, 8])
 with col1:
     if st.button("◀", key="prev"):
-        st.session_state.current_index = (st.session_state.current_index - 1) % len(images)
-      
+        st.session_state.current_index = (
+            st.session_state.current_index - 1) % len(images)
+
 with col2:
     if st.button("▶", key="next"):
-        st.session_state.current_index = (st.session_state.current_index + 1) % len(images)
-       
+        st.session_state.current_index = (
+            st.session_state.current_index + 1) % len(images)
+
 # Optional content below the carousel
 st.markdown("Navigate through the Architecture Diagrams using the arrows.")
