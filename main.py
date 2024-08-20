@@ -107,7 +107,7 @@ def top_navigation():
 top_navigation()
 st.markdown("""<hr style="height:2px;border:none;color:#1c83e1;background-color:#1c83e1;" /> """,
             unsafe_allow_html=True)
-
+st.markdown(":green[Please refresh the browser if unable to close the maximised window]")
 
 # current_date = date.today()
 

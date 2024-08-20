@@ -15,7 +15,7 @@ st.markdown(
     """
     <style>
     .custom-title {
-        color: #324ab2;  /* Violet */
+        color: #b19cd9;  /* Violet */
         font-size: 40px;
         font-weight: bold;
     }
@@ -75,8 +75,10 @@ st.markdown(
 st.markdown('<p class="custom-title">Architecture Diagrams </p>',
             unsafe_allow_html=True)
 st.write("Current Date:", date.today())
-st.markdown("""<hr style="height:2px;border:none;color:#324ab2;background-color:#324ab2;" /> """,
+st.markdown("""<hr style="height:2px;border:none;color:#b19cd9;background-color:#b19cd9;" /> """,
             unsafe_allow_html=True)
+st.markdown(":green[Please refresh the browser if unable to close the maximised window]")
+
 
 images = [
     {"url": "https://dreamdemoassets.blob.core.windows.net/nrf/daidemo_fabric_3_demo_arch_V2.gif",

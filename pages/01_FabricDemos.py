@@ -4,58 +4,6 @@ from datetime import date
 from PIL import Image
 import requests
 from io import BytesIO
-# import hmac
-
-# #--- authenticate with password ---
-
-# def check_password():
-#     """Returns `True` if the user had the correct password."""
-
-#     def password_entered():
-#         """Checks whether a password entered by the user is correct."""
-#         if hmac.compare_digest(st.session_state["password"], st.secrets["password"]):
-#             st.session_state["password_correct"] = True
-#             del st.session_state["password"]  # Don't store the password.
-#         else:
-#             st.session_state["password_correct"] = False
-
-#     # Return True if the password is validated.
-#     if st.session_state.get("password_correct", False):
-#         return True
-
-#     # Show input for password.
-#     st.text_input(
-#         "Password", type="password", on_change=password_entered, key="password"
-#     )
-#     if "password_correct" in st.session_state:
-#         st.error("😕 Password incorrect")
-#     return False
-
-
-# if not check_password():
-#     st.stop()  # Do not continue if check_password is not True.
-
-# # Main Streamlit app starts here
-# st.write("Here goes your normal Streamlit app...")
-# st.button("Click me")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Page Configuration
 st.set_page_config(
@@ -69,7 +17,7 @@ st.set_page_config(
 st.title(":green[Microsoft Fabric Demos]")
 st.write("Current Date:", date.today())
 st.markdown("""<hr style="height:2px;border:none;color:#158237;background-color:#158237;" /> """, unsafe_allow_html=True)
-
+st.markdown(":green[Please refresh the browser if unable to close the maximised window]")
 # State to toggle expand/collapse
 if 'expand_all' not in st.session_state:
     st.session_state.expand_all = False
@@ -249,7 +197,7 @@ for i, widget in enumerate(filtered_widget_urls):
     current_col = (current_col + 1) % 2
 
 
-
+#old code -------
 
 
 
