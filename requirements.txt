@@ -23,4 +23,7 @@ streamlit_extras
 snowflake-connector-python
 extra-streamlit-components
 #streamlit feedparser
-feedparser
+feedparser==6.0.8
+requests==2.28.1
+beautifulsoup4==4.12.2
+streamlit==1.21.0
