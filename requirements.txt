@@ -22,4 +22,5 @@ streamlit_player
 streamlit_extras
 snowflake-connector-python
 extra-streamlit-components
-streamlit feedparser
+#streamlit feedparser
+feedparser
